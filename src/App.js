@@ -27,8 +27,11 @@ function App() {
   },[]);
 
   const fetchData =async ()=>{
+    debugger;
     try{
       const response = await fetch(endpoint);
+      if(response.status !== 200)
+        throw "error processing API";
       return await response.json();
     }
     catch(ex){
