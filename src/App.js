@@ -16,11 +16,11 @@ function App() {
   useEffect(()=>{
     const fetchDataAndLog = async () => {
       try {
-          const res = await fetchData();
-          setCountryData(res);
-          setFilteredData(res)
+        const res = await fetchData();
+        setCountryData(res);
+        setFilteredData(res);
       } catch (error) {
-          console.error(error);
+        console.error(error);
       }
   };
   fetchDataAndLog();
@@ -30,8 +30,9 @@ function App() {
     debugger;
     try{
       const response = await fetch(endpoint);
-      if(response.status !== 200)
-        throw "error processing API";
+      if (!response.ok) {
+        throw new Error("Error processing API");
+      }
       return await response.json();
     }
     catch(ex){
