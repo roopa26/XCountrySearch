@@ -41,13 +41,14 @@ function App() {
   }
 
   const debounceSearch = ()=>{
-    
-    clearInterval(timeIntervalId.current);
+    const filteredData = countryData.filter((item) => {return item.name.official.toLowerCase().includes(searchText)});
+    setFilteredData(filteredData);
+    // clearInterval(timeIntervalId.current);
 
-    timeIntervalId.current = setTimeout(()=>{
-      const filteredData = countryData.filter((item) => {return item.name.official.toLowerCase().includes(searchText)});
-      setFilteredData(filteredData);
-    },100)
+    // timeIntervalId.current = setTimeout(()=>{
+    //   const filteredData = countryData.filter((item) => {return item.name.official.toLowerCase().includes(searchText)});
+    //   setFilteredData(filteredData);
+    // },100)
   }
 
   useEffect(()=>{
