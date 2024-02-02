@@ -1,24 +1,74 @@
 import logo from './logo.svg';
 import './App.css';
+import CountryCard from './components/Card/CountryCard';
+import { useEffect, useRef, useState } from 'react';
+import './App.css';
 
 function App() {
+
+  const [countryData, setCountryData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const timeIntervalId = useRef(null);
+
+  const endpoint = "https://restcountries.com/v3.1/all";
+
+  useEffect(()=>{
+    const fetchDataAndLog = async () => {
+      try {
+          const res = await fetchData();
+          setCountryData(res);
+          setFilteredData(res)
+      } catch (error) {
+          console.error(error);
+      }
+  };
+  fetchDataAndLog();
+  },[]);
+
+  const fetchData =async ()=>{
+    try{
+      const response = await fetch(endpoint);
+      return await response.json();
+    }
+    catch(ex){
+      console.log(ex);
+    }
+  }
+
+  const hanldeOnChange = (e) => {
+    setSearchText(e.target.value.trim().toLowerCase());
+  }
+
+  const debounceSearch = ()=>{
+    
+    clearInterval(timeIntervalId.current);
+
+    timeIntervalId.current = setTimeout(()=>{
+      const filteredData = countryData.filter((item) => {return item.name.official.toLowerCase().includes(searchText)});
+      setFilteredData(filteredData);
+    },100)
+  }
+
+  useEffect(()=>{
+    if(searchText.length > 0){
+      debounceSearch();      
+    }
+    else{
+      setFilteredData(countryData);
+    }
+  },[searchText]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input style={{width:'500px',height:'20px',margin:'10px auto', display:'block'}} type = "text" placeholder='Search for countries...' value={searchText} onChange={hanldeOnChange}/>
+      <div className='wrap'>
+      {filteredData.map((item)=>(
+         <CountryCard id={item.name.common} countryFlag={item.flags.png} altName={item.flags.alt} countryName={item.name.official}/>   
+      ))}
     </div>
+    </div>
+    
   );
 }
 

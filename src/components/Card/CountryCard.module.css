@@ -1,0 +1,29 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 14.28%;
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 300px;
+}
+
+.image{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img{
+    height: 200px;
+    width: 80%;
+}
+
+.countryName{
+    padding-top: 0.5rem;
+    text-align: center;
+}
