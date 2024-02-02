@@ -9,7 +9,7 @@ function App() {
   const [countryData, setCountryData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const timeIntervalId = useRef(null);
+  //const timeIntervalId = useRef(null);
 
   const endpoint = "https://restcountries.com/v3.1/all";
 
@@ -17,6 +17,9 @@ function App() {
     const fetchDataAndLog = async () => {
       try {
         const res = await fetchData();
+        if (!Array.isArray(res)) { // Check if the response is not an array
+          throw new Error("Invalid response from API");
+      }
         setCountryData(res);
         setFilteredData(res);
       } catch (error) {
