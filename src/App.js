@@ -37,11 +37,11 @@ function App() {
   }
 
   const hanldeOnChange = (e) => {
-    setSearchText(e.target.value.trim().toLowerCase());
+    setSearchText(e.target.value.trim());
   }
 
   const debounceSearch = ()=>{
-    const filteredData = countryData.filter((item) => {return item.name.official.toLowerCase().includes(searchText)});
+    const filteredData = countryData.filter((item) => {return item.name.official.includes(searchText)});
     setFilteredData(filteredData);
     // clearInterval(timeIntervalId.current);
 

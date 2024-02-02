@@ -1,13 +1,13 @@
 import React from "react";
-import styles from './CountryCard.module.css';
+import './CountryCard.css';
 
 function CountryCard({countryFlag, countryName, altName}){
     return (
-    <div className={styles.countryCard}>
-        <div className={styles.image}>
+    <div className="countryCard">
+        <div className="image">
             <img src={countryFlag} alt={altName}/>
        
-            <div className={styles.countryName}>
+            <div className="countryName">
                 {countryName}
              </div>
         </div>
