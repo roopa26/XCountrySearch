@@ -37,7 +37,7 @@
   }
 }
 
-.wrap{
+/* .wrap{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -46,4 +46,34 @@
   width: 100%;
   max-width: 100%;
   margin: 30px;
+} */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.countries-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.countryCard {
+  width: 150px;
+  text-align: center;
+  margin: 10px;
+}
+
+.countryCard img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
 }
